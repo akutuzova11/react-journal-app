@@ -28,7 +28,6 @@ export default [
         "warn",
         { allowConstantExport: true },
       ],
-      "comma-dangle": ["error", "never"],
       quotes: ["error", "double"],
     },
   },
