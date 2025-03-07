@@ -1,5 +1,5 @@
 import "./Button.css";
 
-export const Button = ({ text }) => {
-  return <button className="button accent">{text}</button>;
+export const Button = ({ text, onClick }) => {
+  return <button onClick={onClick} className="button accent">{text}</button>;
 };
