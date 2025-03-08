@@ -3,6 +3,7 @@ import { Button } from "../Button/Button";
 import { useEffect, useReducer, useRef } from "react";
 import classNames from "classnames";
 import { initialState, formReducer } from "./JournalForm.state";
+import { Input } from "../Input/input";
 
 export const JournalForm = ({ onSubmit }) => {
   const [formState, dispatchForm] = useReducer(formReducer, initialState);
@@ -61,15 +62,14 @@ export const JournalForm = ({ onSubmit }) => {
   return (
     <form className={styles["journal-form"]} onSubmit={addJournalItem}>
       <div>
-        <input
+        <Input
           type="text"
           onChange={onChange}
           ref={titleRef}
+          isValid={isValid.title}
           value={values.title}
           name="title"
-          className={classNames(styles["input-title"], {
-            [styles["invalid"]]: !isValid.title,
-          })}
+          appearance="title"
         />
       </div>
 
@@ -77,16 +77,14 @@ export const JournalForm = ({ onSubmit }) => {
         <label htmlFor="date" className={styles["form-label"]}>
           <span>Date</span>
         </label>
-        <input
+        <Input
           type="date"
           onChange={onChange}
           ref={dateRef}
+          isValid={isValid.date}
           value={values.date}
           name="date"
           id="date"
-          className={classNames(styles["input"], {
-            [styles["invalid"]]: !isValid.date,
-          })}
         />
       </div>
 
@@ -94,7 +92,7 @@ export const JournalForm = ({ onSubmit }) => {
         <label htmlFor="tag" className={styles["form-label"]}>
           <span>Tags</span>
         </label>
-        <input
+        <Input
           type="text"
           onChange={onChange}
           value={values.tag}
