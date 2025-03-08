@@ -2,8 +2,8 @@ import { CardButton } from "../CardButton/CardButton";
 import { JournalItem } from "../JournalItem/JournalItem";
 import "./JournalList.css";
 
-export const JournalList = ({ items }) => {
-  if (items.length === 0) {
+export const JournalList = ({ items=[] }) => {
+  if (!items.length) {
     return <p>No memories, add the first one</p>;
   }
 
