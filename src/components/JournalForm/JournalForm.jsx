@@ -1,16 +1,34 @@
 import styles from "./JournalForm.module.css";
 import { Button } from "../Button/Button";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 import classNames from "classnames";
 import { initialState, formReducer } from "./JournalForm.state";
 
 export const JournalForm = ({ onSubmit }) => {
   const [formState, dispatchForm] = useReducer(formReducer, initialState);
   const { isValid, isFormReadyToSubmit, values } = formState;
+  const titleRef = useRef();
+  const dateRef = useRef();
+  const postRef = useRef();
+
+  const focusError = (isValid) => {
+    switch (true) {
+      case !isValid.title:
+        titleRef.current.focus();
+        break;
+      case !isValid.date:
+        dateRef.current.focus();
+        break;
+      case !isValid.post:
+        postRef.current.focus();
+        break;
+    }
+  };
 
   useEffect(() => {
     let timerId;
     if (!isValid.date || !isValid.post || !isValid.title) {
+      focusError(isValid);
       timerId = setTimeout(() => {
         dispatchForm({ type: "resetValidity" });
       }, 1000);
@@ -46,6 +64,7 @@ export const JournalForm = ({ onSubmit }) => {
         <input
           type="text"
           onChange={onChange}
+          ref={titleRef}
           value={values.title}
           name="title"
           className={classNames(styles["input-title"], {
@@ -61,6 +80,7 @@ export const JournalForm = ({ onSubmit }) => {
         <input
           type="date"
           onChange={onChange}
+          ref={dateRef}
           value={values.date}
           name="date"
           id="date"
@@ -87,6 +107,7 @@ export const JournalForm = ({ onSubmit }) => {
       <textarea
         name="post"
         onChange={onChange}
+        ref={postRef}
         value={values.post}
         id=""
         cols="30"
