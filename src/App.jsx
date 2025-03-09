@@ -6,6 +6,7 @@ import { LeftPanel } from "./layout/LeftPanel/LeftPanel";
 import { RightPanel } from "./layout/RightPanel/RightPanel";
 import styles from "./App.module.css";
 import { useLocalStorage } from "./hooks/useLocalStorage.hook";
+import { UserContextProvider } from "./context/userContextProvider";
 
 function mapItems(items) {
   if (!items) {
@@ -21,9 +22,8 @@ function App() {
     setItems([
       ...mapItems(items),
       {
-        title: item.title,
+        ...item,
         date: new Date(item.date),
-        post: item.post,
         id:
           items.length > 0 ? Math.max(...items.map((item) => item.id)) + 1 : 1,
       },
@@ -31,16 +31,20 @@ function App() {
   };
 
   return (
-    <div className={styles["app"]}>
-      <LeftPanel>
-        <Header />
-        <JournalAdd />
-        <JournalList items={mapItems(items)} />
-      </LeftPanel>
-      <RightPanel>
-        <JournalForm onSubmit={addItem} />
-      </RightPanel>
-    </div>
+    <>
+      <UserContextProvider>
+        <div className={styles["app"]}>
+          <LeftPanel>
+            <Header />
+            <JournalAdd />
+            <JournalList items={mapItems(items)} />
+          </LeftPanel>
+          <RightPanel>
+            <JournalForm onSubmit={addItem} />
+          </RightPanel>
+        </div>
+      </UserContextProvider>
+    </>
   );
 }
 
