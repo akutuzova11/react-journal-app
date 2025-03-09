@@ -1,6 +1,6 @@
 import "./JournalItem.css";
 
-export const JournalItem = ({ title, date, text }) => {
+export const JournalItem = ({ title, date, post }) => {
   const formatedDate = new Intl.DateTimeFormat("pl-PL").format(date);
 
   return (
@@ -8,7 +8,7 @@ export const JournalItem = ({ title, date, text }) => {
       <h2 className="journal-item__header">{title}</h2>
       <h2 className="journal-item__body">
         <div className="journal-item__date">{formatedDate}</div>
-        <div className="journal-item__text">{text}</div>
+        <div className="journal-item__post">{post}</div>
       </h2>
     </>
   );
