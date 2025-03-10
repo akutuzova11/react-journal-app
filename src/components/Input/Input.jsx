@@ -3,7 +3,7 @@ import styles from "./Input.module.css";
 import classNames from "classnames";
 
 export const Input = forwardRef(function Input(
-  { className, isValid = true, appearance, ...props },
+  { className, isValid = true, appearance = "text", ...props },
   ref
 ) {
   return (
@@ -13,6 +13,7 @@ export const Input = forwardRef(function Input(
       className={classNames(className, styles["input"], {
         [styles["invalid"]]: !isValid,
         [styles["input-title"]]: appearance === "title",
+        [styles["input"]]: appearance === "text",
       })}
     />
   );
