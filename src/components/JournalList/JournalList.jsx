@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { CardButton } from "../CardButton/CardButton";
 import { JournalItem } from "../JournalItem/JournalItem";
-import "./JournalList.css";
+import styles from "./JournalList.module.css";
 import { UserContext } from "../../context/userContext";
 
 export const JournalList = ({ items = [], setItem }) => {
@@ -18,12 +18,12 @@ export const JournalList = ({ items = [], setItem }) => {
   };
 
   return (
-    <div className="journal-list">
+    <div className={styles["journal-list"]}>
       {items
         .filter((element) => element.userId === userId)
         .sort(sortItems)
         .map((element) => (
-          <CardButton key={element.id} onClick={()=> setItem(element)}>
+          <CardButton key={element.id} onClick={() => setItem(element)}>
             <JournalItem
               title={element.title}
               date={element.date}
