@@ -1,8 +1,8 @@
-import "./Button.css";
+import styles from "./Button.module.css";
 
 export const Button = ({ onClick }) => {
   return (
-    <button onClick={onClick} className="button accent">
+    <button onClick={onClick} className={`${styles.button} ${styles.accent}`}>
       Save
     </button>
   );
