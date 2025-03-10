@@ -6,7 +6,7 @@ import { initialState, formReducer } from "./JournalForm.state";
 import { Input } from "../Input/input";
 import { UserContext } from "../../context/userContext";
 
-export const JournalForm = ({ onSubmit }) => {
+export const JournalForm = ({ onSubmit, data }) => {
   const [formState, dispatchForm] = useReducer(formReducer, initialState);
   const { isValid, isFormReadyToSubmit, values } = formState;
   const titleRef = useRef();
@@ -29,6 +29,13 @@ export const JournalForm = ({ onSubmit }) => {
   };
 
   useEffect(() => {
+    dispatchForm({
+      type: "setValue",
+      payload: { ...data },
+    });
+  }, [data]);
+
+  useEffect(() => {
     let timerId;
     if (!isValid.date || !isValid.post || !isValid.title) {
       focusError(isValid);
@@ -46,8 +53,12 @@ export const JournalForm = ({ onSubmit }) => {
     if (isFormReadyToSubmit) {
       onSubmit(values);
       dispatchForm({ type: "clear" });
+      dispatchForm({
+        type: "setValue",
+        payload: { userId },
+      });
     }
-  }, [isFormReadyToSubmit, values, onSubmit]);
+  }, [isFormReadyToSubmit, values, onSubmit, userId]);
 
   useEffect(() => {
     dispatchForm({
@@ -91,7 +102,9 @@ export const JournalForm = ({ onSubmit }) => {
           onChange={onChange}
           ref={dateRef}
           isValid={isValid.date}
-          value={values.date}
+          value={
+            values.date ? new Date(values.date.toISOString().slice(0, 10)) : ""
+          }
           name="date"
           id="date"
         />
@@ -123,7 +136,7 @@ export const JournalForm = ({ onSubmit }) => {
           [styles["invalid"]]: !isValid.post,
         })}
       ></textarea>
-      <Button text="Save" />
+      <Button />
     </form>
   );
 };
