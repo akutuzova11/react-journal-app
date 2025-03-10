@@ -4,7 +4,7 @@ import { JournalItem } from "../JournalItem/JournalItem";
 import "./JournalList.css";
 import { UserContext } from "../../context/userContext";
 
-export const JournalList = ({ items = [] }) => {
+export const JournalList = ({ items = [], setItem }) => {
   const { userId } = useContext(UserContext);
 
   if (!items.length) {
@@ -23,7 +23,7 @@ export const JournalList = ({ items = [] }) => {
         .filter((element) => element.userId === userId)
         .sort(sortItems)
         .map((element) => (
-          <CardButton key={element.id}>
+          <CardButton key={element.id} onClick={()=> setItem(element)}>
             <JournalItem
               title={element.title}
               date={element.date}
