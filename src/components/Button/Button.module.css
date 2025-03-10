@@ -10,9 +10,10 @@
 }
 
 .button:hover {
-    background: #222096;
+    background: linear-gradient(90deg, #986355 5%, #B58B7D 25%, #C99383 75%, #986355 98%);
+
 }
 
 .accent {
-    background: #312eb5
+    background: linear-gradient(to right, #312eb5 30%, #986355 100%);
 }
