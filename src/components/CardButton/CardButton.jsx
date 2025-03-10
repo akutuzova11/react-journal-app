@@ -1,7 +1,7 @@
-import "./CardButton.css";
+import styles from "./CardButton.module.css";
 
 export const CardButton = ({ children, className, ...props }) => {
-  const cl = "card-button" + (className ? "" + className : "");
+  const cl = `${styles["card-button"]} ${className || ""}`.trim();
 
   return (
     <button {...props} className={cl}>
