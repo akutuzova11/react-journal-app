@@ -1,11 +1,11 @@
 import { SelectUser } from "../SelectUser/SelectUser";
 import styles from "./Header.module.css";
+import Logo from "../../assets/logo.svg";
 
 export const Header = () => {
-
   return (
     <>
-      <div className={styles.logo}>Logo</div>
+      <img src={Logo} alt="logo" className={styles.logo} />
       <SelectUser />
     </>
   );
