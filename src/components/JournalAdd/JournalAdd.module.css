@@ -1,0 +1,29 @@
+.journal-add {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.journal-add_text {
+    background: linear-gradient(90deg, #986355 5%, #B58B7D 25%, #FAC3B1 50%, #C99383 75%, #986355 98%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+
+.journal-add:hover {
+    background-color: rgba(255, 255, 255, 0.10);
+}
+
+.journal-add_plus {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
