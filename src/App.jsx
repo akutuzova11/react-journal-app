@@ -7,27 +7,48 @@ import { RightPanel } from "./layout/RightPanel/RightPanel";
 import styles from "./App.module.css";
 import { useLocalStorage } from "./hooks/useLocalStorage.hook";
 import { UserContextProvider } from "./context/userContextProvider";
+import { useState } from "react";
 
 function mapItems(items) {
-  if (!items) {
+  if (!Array.isArray(items)) {
     return [];
   }
-  return items.map((i) => ({ ...i, date: new Date(i.date) }));
+  return items.map((i) => ({ ...i, date: i.date ? new Date(i.date) : null }));
 }
 
 function App() {
   const [items, setItems] = useLocalStorage("data", []);
+  const [selectedItem, setSelectedItem] = useState();
 
   const addItem = (item) => {
-    setItems([
-      ...mapItems(items),
-      {
-        ...item,
-        date: new Date(item.date),
-        id:
-          items.length > 0 ? Math.max(...items.map((item) => item.id)) + 1 : 1,
-      },
-    ]);
+    const safeItems = Array.isArray(items) ? items : [];
+
+    if (!item.id) {
+      setItems([
+        ...mapItems(safeItems),
+        {
+          ...item,
+          date: new Date(item.date),
+          id:
+            safeItems.length > 0
+              ? Math.max(...safeItems.map((item) => item.id)) + 1
+              : 1,
+        },
+      ]);
+    } else {
+      setItems(
+        ...mapItems(items).map((i) => {
+          if ((i.id = item.id)) {
+            return {
+              ...item,
+              date: new Date(item.date),
+            };
+          } else {
+            return i;
+          }
+        })
+      );
+    }
   };
 
   return (
@@ -37,10 +58,10 @@ function App() {
           <LeftPanel>
             <Header />
             <JournalAdd />
-            <JournalList items={mapItems(items)} />
+            <JournalList items={mapItems(items)} setItem={setSelectedItem} />
           </LeftPanel>
           <RightPanel>
-            <JournalForm onSubmit={addItem} />
+            <JournalForm onSubmit={addItem} data={selectedItem} />
           </RightPanel>
         </div>
       </UserContextProvider>
