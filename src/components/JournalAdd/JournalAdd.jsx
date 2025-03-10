@@ -1,10 +1,10 @@
 import { CardButton } from "../CardButton/CardButton";
 import "./JournalAdd.css";
 
-export const JournalAdd = () => {
+export const JournalAdd = ({ clearForm }) => {
   return (
-    <CardButton className="journal-add">
-    New memory
-</CardButton>
-  )
+    <CardButton className="journal-add" onClick={clearForm}>
+      New memory
+    </CardButton>
+  );
 };
