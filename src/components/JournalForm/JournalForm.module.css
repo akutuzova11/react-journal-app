@@ -20,7 +20,6 @@
 .form-row {
     display: flex;
     align-items: center;
-    gap: 50px;
 }
 
 .form-label {
@@ -66,4 +65,56 @@
     background: rgb(255, 255, 255, 0.05);
     border: 1px solid #373739;
     border-radius: 5px;
+}
+
+.input-date {
+    flex: 1;
+    /* Take full width */
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    color: white;
+    padding: 10px 40px 10px 0;
+}
+
+.date-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    position: relative;
+
+}
+
+.calendar-button {
+    position: absolute;
+    left: 100px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.calendar-add {
+    width: 24px;
+    height: 24px;
+    background-image: url("../../assets/calendarAddPurple.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background-image 0.3s ease-in-out;
+}
+
+.calendar-add:hover {
+    background-image: url("../../assets/calendarAddGold.svg");
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+.calendar-icon, .tag-icon {
+    width: 16px;
+    height: 16px;
 }
