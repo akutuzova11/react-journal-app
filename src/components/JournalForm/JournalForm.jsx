@@ -6,6 +6,8 @@ import { initialState, formReducer } from "./JournalForm.state";
 import { Input } from "../Input/input";
 import { UserContext } from "../../context/userContext";
 import Archive from "../../assets/trash.svg";
+import CalendarIcon from "../../assets/calendar.svg"
+import TagIcon from "../../assets/tag.svg"
 
 export const JournalForm = ({ onSubmit, data, onDelete }) => {
   const [formState, dispatchForm] = useReducer(formReducer, initialState);
@@ -116,23 +118,37 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
 
       <div className={styles["form-row"]}>
         <label htmlFor="date" className={styles["form-label"]}>
+        <img className={styles["calendar-icon"]} src={CalendarIcon} alt="calendar icon" />
           <span>Date</span>
         </label>
-        <Input
-          type="date"
-          onChange={onChange}
-          ref={dateRef}
-          isValid={isValid.date}
-          value={
-            values.date ? new Date(values.date).toISOString().slice(0, 10) : ""
-          }
-          name="date"
-          id="date"
-        />
+        <div className={styles["date-wrapper"]}>
+          <Input
+            type="date"
+            onChange={onChange}
+            ref={dateRef}
+            isValid={isValid.date}
+            value={
+              values.date
+                ? new Date(values.date).toISOString().slice(0, 10)
+                : ""
+            }
+            name="date"
+            id="date"
+            className={styles["input-date"]}
+          />
+          <button
+            type="button"
+            className={styles["calendar-button"]}
+            onClick={() => dateRef.current.showPicker()}
+          >
+            <div className={styles["calendar-add"]}></div>
+          </button>
+        </div>
       </div>
 
       <div className={styles["form-row"]}>
         <label htmlFor="tag" className={styles["form-label"]}>
+        <img className={styles["tag-icon"]} src={TagIcon} alt="tag icon" />
           <span>Tags</span>
         </label>
         <Input
