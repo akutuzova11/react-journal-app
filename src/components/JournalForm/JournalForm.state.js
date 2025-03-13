@@ -42,6 +42,11 @@ export const formReducer = (prevState, action) => {
         isFormReadyToSubmit: postValidity && dateValidity && titleValidity,
       };
     }
+    case "resetSubmit":
+      return {
+        ...prevState,
+        isFormReadyToSubmit: false,
+      };
     default:
       return prevState;
   }

@@ -1,6 +1,6 @@
 import styles from "./JournalForm.module.css";
 import { Button } from "../Button/Button";
-import { useContext, useEffect, useReducer, useRef } from "react";
+import { useContext, useEffect, useReducer, useRef, useState } from "react";
 import classNames from "classnames";
 import { initialState, formReducer } from "./JournalForm.state";
 import { Input } from "../Input/input";
@@ -8,10 +8,12 @@ import { UserContext } from "../../context/userContext";
 import Archive from "../../assets/trash.svg";
 import CalendarIcon from "../../assets/calendar.svg";
 import TagIcon from "../../assets/tag.svg";
+import { LoadingOverlay } from "../LoadingOverlay/LoadingOverlay.jsx";
 
 export const JournalForm = ({ onSubmit, data, onDelete }) => {
   const [formState, dispatchForm] = useReducer(formReducer, initialState);
   const { isValid, isFormReadyToSubmit, values } = formState;
+  const [isLoading, setIsLoading] = useState(false);
   const titleRef = useRef();
   const dateRef = useRef();
   const postRef = useRef();
@@ -47,26 +49,21 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
   }, [data, userId]);
 
   useEffect(() => {
-    let timerId;
     if (!isValid.date || !isValid.post || !isValid.title) {
       focusError(isValid);
-      timerId = setTimeout(() => {
-        dispatchForm({ type: "resetValidity" });
-      }, 1000);
-    }
-
-    return () => {
-      clearInterval(timerId);
     };
   }, [isValid]);
 
   useEffect(() => {
-    if (isFormReadyToSubmit) {
+    if (isFormReadyToSubmit && isValid.title && isValid.date && isValid.post) {
+      setIsLoading(true);
       onSubmit(values);
       dispatchForm({ type: "clear" });
       dispatchForm({ type: "setValue", payload: { userId } });
+      setIsLoading(false);
+      dispatchForm({ type: "resetSubmit" });
     }
-  }, [isFormReadyToSubmit, values, onSubmit, userId]);
+  }, [isFormReadyToSubmit, values, onSubmit, userId, isValid]);
 
   useEffect(() => {
     dispatchForm({
@@ -89,7 +86,7 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
       type: "setValue",
       payload: { [name]: value },
     });
-  };
+};
 
   const addJournalItem = (e) => {
     e.preventDefault();
@@ -114,6 +111,7 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
       onSubmit={addJournalItem}
       onKeyDown={handleKeyDown}
     >
+      {isLoading && <LoadingOverlay />}
       <div className={styles["form-row"]}>
         <Input
           type="text"
@@ -196,7 +194,8 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
           [styles["invalid"]]: !isValid.post,
         })}
       ></textarea>
-      <Button />
+      <Button disabled={isLoading || !isValid.title || !isValid.date || !isValid.post}
+        onClick={addJournalItem} />
     </form>
   );
 };
