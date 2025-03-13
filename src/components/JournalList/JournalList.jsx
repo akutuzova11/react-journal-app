@@ -32,6 +32,7 @@ export const JournalList = ({ items = [], setItem }) => {
           <CardButton key={element.id} onClick={() => setItem(element)}>
             <JournalItem
               title={element.title}
+              tag = {element.tag}
               date={element.date}
               post={element.post}
             />
