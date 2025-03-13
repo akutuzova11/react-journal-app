@@ -33,3 +33,9 @@
     line-height: normal;
     overflow: hidden;
 }
+
+.journal-item__tag {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+}
