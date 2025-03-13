@@ -21,3 +21,19 @@
     height: 350px;
     border-radius: 30px;
 }
+
+.show-more-button {
+    background: #ffffff35;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .show-more-button:hover {
+    background: linear-gradient(90deg, #986355 5%, #B58B7D 25%, #C99383 75%, #986355 98%);
+  }
