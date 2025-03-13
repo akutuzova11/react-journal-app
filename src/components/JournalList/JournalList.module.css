@@ -3,3 +3,21 @@
     flex-direction: column;
     gap: 30px;
 }
+
+.journal-memories {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.journal-text {
+    margin-top: 0;
+    color: gray;
+}
+
+.journal-image {
+    width: 400px;
+    height: 350px;
+    border-radius: 30px;
+}
