@@ -6,8 +6,8 @@ import { initialState, formReducer } from "./JournalForm.state";
 import { Input } from "../Input/input";
 import { UserContext } from "../../context/userContext";
 import Archive from "../../assets/trash.svg";
-import CalendarIcon from "../../assets/calendar.svg"
-import TagIcon from "../../assets/tag.svg"
+import CalendarIcon from "../../assets/calendar.svg";
+import TagIcon from "../../assets/tag.svg";
 
 export const JournalForm = ({ onSubmit, data, onDelete }) => {
   const [formState, dispatchForm] = useReducer(formReducer, initialState);
@@ -76,9 +76,18 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
   }, [userId]);
 
   const onChange = (event) => {
+    let { name, value } = event.target;
+
+    if (name === "tag") {
+      let words = value.split(/\s+/).filter(Boolean);
+
+      words = words.map((word) => (word.startsWith("#") ? word : `#${word}`));
+
+      value = words.join(" ") + (value.endsWith(" ") ? " " : "");
+    }
     dispatchForm({
       type: "setValue",
-      payload: { [event.target.name]: event.target.value },
+      payload: { [name]: value },
     });
   };
 
@@ -93,8 +102,18 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
     dispatchForm({ type: "setValue", payload: { userId } });
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <form className={styles["journal-form"]} onSubmit={addJournalItem}>
+    <form
+      className={styles["journal-form"]}
+      onSubmit={addJournalItem}
+      onKeyDown={handleKeyDown}
+    >
       <div className={styles["form-row"]}>
         <Input
           type="text"
@@ -118,7 +137,11 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
 
       <div className={styles["form-row"]}>
         <label htmlFor="date" className={styles["form-label"]}>
-        <img className={styles["calendar-icon"]} src={CalendarIcon} alt="calendar icon" />
+          <img
+            className={styles["calendar-icon"]}
+            src={CalendarIcon}
+            alt="calendar icon"
+          />
           <span>Date</span>
         </label>
         <div className={styles["date-wrapper"]}>
@@ -148,7 +171,7 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
 
       <div className={styles["form-row"]}>
         <label htmlFor="tag" className={styles["form-label"]}>
-        <img className={styles["tag-icon"]} src={TagIcon} alt="tag icon" />
+          <img className={styles["tag-icon"]} src={TagIcon} alt="tag icon" />
           <span>Tags</span>
         </label>
         <Input
