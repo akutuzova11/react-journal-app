@@ -22,7 +22,7 @@
     border-radius: 30px;
 }
 
-.show-more-button {
+.journal-list--expanded {
     background: #ffffff35;
     color: white;
     border: none;
@@ -34,6 +34,6 @@
     transition: background-color 0.3s ease;
   }
   
-  .show-more-button:hover {
+  .journal-list--expanded:hover {
     background: linear-gradient(90deg, #986355 5%, #B58B7D 25%, #C99383 75%, #986355 98%);
   }

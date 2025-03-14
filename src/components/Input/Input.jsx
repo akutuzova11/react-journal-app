@@ -11,8 +11,8 @@ export const Input = forwardRef(function Input(
       {...props}
       ref={ref}
       className={classNames(className, styles["input"], {
-        [styles["invalid"]]: !isValid,
-        [styles["input-title"]]: appearance === "title",
+        [styles["input--invalid"]]: !isValid,
+        [styles["input--title"]]: appearance === "title",
         [styles["input"]]: appearance === "text",
       })}
     />

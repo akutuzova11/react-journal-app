@@ -29,15 +29,15 @@ export const SelectUser = () => {
 
   return (
     <div className={styles["custom-dropdown"]} ref={dropdownRef}>
-      <div className={styles["selected"]} onClick={toggleDown}>
+      <div className={styles["custom-dropdown__selected"]} onClick={toggleDown}>
         {selectedUser}
       </div>
       {isOpen && (
-        <div className={styles["dropdown-options"]}>
-          <div className={styles["option"]} onClick={() => changeUser(1)}>
+        <div className={styles["custom-dropdown__options"]}>
+          <div className={styles["custom-dropdown__option"]} onClick={() => changeUser(1)}>
             Anna
           </div>
-          <div className={styles["option"]} onClick={() => changeUser(2)}>
+          <div className={styles["custom-dropdown__option"]} onClick={() => changeUser(2)}>
             Mark
           </div>
         </div>

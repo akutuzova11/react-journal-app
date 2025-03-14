@@ -7,7 +7,7 @@
     text-align: center;
 }
 
-.selected {
+.custom-dropdown__selected {
     padding: 10px;
     color: white;
     cursor: pointer;
@@ -16,7 +16,7 @@
 
 }
 
-.dropdown-options {
+.custom-dropdown__options {
     position: absolute;
     top: 100%;
     text-align: center;
@@ -27,13 +27,13 @@
     overflow-y: auto;
 }
 
-.option {
+.custom-dropdown__option {
     padding: 10px;
     color: white;
     cursor: pointer;
    
 }
 
-.option:hover {
+.custom-dropdown__option:hover {
     background: linear-gradient(to right, #312eb5 30%, #986355 100%);
 }

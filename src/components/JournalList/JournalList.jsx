@@ -58,7 +58,7 @@ export const JournalList = ({ items = [], setItem }) => {
       ))}
       {filteredItems.length > 2 && (
         <button
-          className={styles["show-more-button"]}
+          className={styles["journal-list--expanded"]}
           onClick={handleToggleVisibility}
         >
           {visibleCount === filteredItems.length ? "Show Less" : "Show More"}
