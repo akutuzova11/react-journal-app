@@ -112,7 +112,7 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
       onKeyDown={handleKeyDown}
     >
       {isLoading && <LoadingOverlay />}
-      <div className={styles["form-row"]}>
+      <div className={styles["journal-form__row"]}>
         <Input
           type="text"
           onChange={onChange}
@@ -124,7 +124,7 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
         />
         {data?.id && (
           <button
-            className={styles["remove"]}
+            className={styles["journal-form__remove"]}
             type="button"
             onClick={deleteJournalItem}
           >
@@ -133,16 +133,16 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
         )}
       </div>
 
-      <div className={styles["form-row"]}>
-        <label htmlFor="date" className={styles["form-label"]}>
+      <div className={styles["journal-form__row"]}>
+        <label htmlFor="date" className={styles["journal-form__label"]}>
           <img
-            className={styles["calendar-icon"]}
+            className={styles["journal-form__icon"]}
             src={CalendarIcon}
             alt="calendar icon"
           />
           <span>Date</span>
         </label>
-        <div className={styles["date-wrapper"]}>
+        <div className={styles["journal-form__date-wrapper"]}>
           <Input
             type="date"
             onChange={onChange}
@@ -159,17 +159,17 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
           />
           <button
             type="button"
-            className={styles["calendar-button"]}
+            className={styles["journal-form__button--calendar"]}
             onClick={() => dateRef.current.showPicker()}
           >
-            <div className={styles["calendar-add"]}></div>
+            <div className={styles["journal-form__calendar-add"]}></div>
           </button>
         </div>
       </div>
 
-      <div className={styles["form-row"]}>
-        <label htmlFor="tag" className={styles["form-label"]}>
-          <img className={styles["tag-icon"]} src={TagIcon} alt="tag icon" />
+      <div className={styles["journal-form__row"]}>
+        <label htmlFor="tag" className={styles["journal-form__label"]}>
+          <img className={styles["journal-form__icon"]} src={TagIcon} alt="tag icon" />
           <span>Tags</span>
         </label>
         <Input
@@ -191,7 +191,7 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
         cols="30"
         rows="10"
         className={classNames(styles["input"], {
-          [styles["invalid"]]: !isValid.post,
+          [styles["journal-form__input--invalid"]]: !isValid.post,
         })}
       ></textarea>
       <Button disabled={isLoading || !isValid.title || !isValid.date || !isValid.post}

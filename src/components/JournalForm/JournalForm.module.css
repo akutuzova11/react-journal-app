@@ -17,12 +17,12 @@
     color: white;
 }
 
-.form-row {
+.journal-form__row {
     display: flex;
     align-items: center;
 }
 
-.form-label {
+.journal-form__label {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -43,12 +43,12 @@
     padding: 0px;
 }
 
-.invalid {
+.journal-form__input--invalid {
     border: 1px solid red;
     background: rgb(68, 6, 6)
 }
 
-.remove {
+.journal-form__remove {
     border: none;
     background: none;
     cursor: pointer;
@@ -79,7 +79,7 @@
     padding: 4px; 
 }
 
-.date-wrapper {
+.journal-form__date-wrapper {
     display: flex;
     align-items: center;
     position: relative;
@@ -87,7 +87,7 @@
     position: relative;
 }
 
-.calendar-button {
+.journal-form__button--calendar {
     position: absolute;
     left: 100px;
     background: none;
@@ -96,7 +96,7 @@
     cursor: pointer;
 }
 
-.calendar-add {
+.journal-form__calendar-add {
     width: 24px;
     height: 24px;
     background-image: url("../../assets/calendarAddPurple.svg");
@@ -113,7 +113,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0;
 }
 
-.calendar-icon, .tag-icon {
+.journal-form__icon, .journal-form__icon {
     width: 16px;
     height: 16px;
 }
