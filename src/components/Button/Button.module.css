@@ -9,6 +9,10 @@
     color: white;
 }
 
+.button:disabled {
+    cursor: not-allowed;
+}
+
 .button:hover {
     background: linear-gradient(90deg, #986355 5%, #B58B7D 25%, #C99383 75%, #986355 98%);
 

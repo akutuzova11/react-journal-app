@@ -51,7 +51,7 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
   useEffect(() => {
     if (!isValid.date || !isValid.post || !isValid.title) {
       focusError(isValid);
-    };
+    }
   }, [isValid]);
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
       type: "setValue",
       payload: { [name]: value },
     });
-};
+  };
 
   const addJournalItem = (e) => {
     e.preventDefault();
@@ -169,7 +169,11 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
 
       <div className={styles["journal-form__row"]}>
         <label htmlFor="tag" className={styles["journal-form__label"]}>
-          <img className={styles["journal-form__icon"]} src={TagIcon} alt="tag icon" />
+          <img
+            className={styles["journal-form__icon"]}
+            src={TagIcon}
+            alt="tag icon"
+          />
           <span>Tags</span>
         </label>
         <Input
@@ -194,8 +198,10 @@ export const JournalForm = ({ onSubmit, data, onDelete }) => {
           [styles["journal-form__input--invalid"]]: !isValid.post,
         })}
       ></textarea>
-      <Button disabled={isLoading || !isValid.title || !isValid.date || !isValid.post}
-        onClick={addJournalItem} />
+      <Button
+        disabled={isLoading || !isValid.title || !isValid.date || !isValid.post}
+        onClick={addJournalItem}
+      />
     </form>
   );
 };
